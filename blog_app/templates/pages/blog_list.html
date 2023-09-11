@@ -1,0 +1,19 @@
+{% for blog in blogs %}
+<tr id="blog-{{ blog.pk }}" class="blog-row">
+  {% if blog.image %}
+    <td><img class="img rounded-circle" width="90"  src="{{ blog.image.url }}"  alt="{{ blog.title }}"></td>
+    {% else %}
+    <td>No image</td>
+    {% endif %}
+
+  <td>{{ blog.title }}</td>
+  <td>{{ blog.create }}</td>
+  <td>{{ blog.update }}</td>
+  <td>{{ blog.description }}</td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_blog' pk=blog.pk %}" hx-target="#dialog"><i class="fa fa-edit fa-2x"></i></button>
+    <button type="button" class="btn btn-danger" hx-post="{% url 'remove_blog' pk=blog.pk %} " hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' hx-confirm="Are you sure to delete?"><i class="fa fa-trash fa-0x"></i></button>
+
+  </td>
+</tr>
+{% endfor %}

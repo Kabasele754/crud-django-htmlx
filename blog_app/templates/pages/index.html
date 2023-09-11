@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col">
+ <div class="container">
+
+     <div class="col ">
+      <button hx-get="{% url 'add_blog' %}" hx-target="#dialog" class="btn btn-primary float-end mb-3">
+        <i class="fa-solid fa-plus fa-1x"></i> Add a blog
+      </button>
+         </div>
+      <table class="table table-bordered" >
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>create</th>
+            <th>update</th>
+            <th>description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody  hx-trigger="load, blogListChanged from:body" hx-get="{% url 'blog_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+</div>
+{% endblock content %}
